@@ -1,0 +1,623 @@
+<!--
+  ============================================================================
+  CHAVRY — plateforme de révision · Lycée Émilie de Rodat, Toulouse
+  ============================================================================
+  Fichier unique, sans dépendance (hors Google Fonts). Hébergeable gratuitement
+  sur GitHub Pages : renomme ce fichier en "index.html" et dépose-le.
+
+  >>> 3 LIENS À REMPLACER (cherche "À REMPLACER" dans le fichier) :
+        1. Discord  2. HelloAsso (dons)  3. Google Form (contenu)
+
+  >>> POUR AJOUTER DU CONTENU, ÉDITE UNIQUEMENT L'OBJET "DATA" PLUS BAS.
+      Chaque ressource = { titre, type, format, url }
+        type    : cours | fiche | exos | corrige | annale | lien | video
+        format  : pdf | drive | lien | video   (change l'icône et le verbe)
+        url     : lien PDF hébergé, partage Google Drive, page web, vidéo…
+  ============================================================================
+-->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chavry — réviser le bac · Lycée Émilie de Rodat</title>
+<meta name="description" content="Cours, fiches, exos corrigés et liens utiles pour la Première et la Terminale. Un projet de l'association Chavry, Lycée Émilie de Rodat à Toulouse." />
+<!-- aperçu lors d'un partage (WhatsApp, Insta, etc.) -->
+<meta property="og:title" content="Chavry — réviser le bac" />
+<meta property="og:description" content="Cours, fiches et exos rangés par matière et par chapitre. Par des élèves, pour des élèves." />
+<meta property="og:type" content="website" />
+<!-- favicon : petit losange aux couleurs de Chavry -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='8' y='8' width='16' height='16' rx='4' transform='rotate(45 16 16)' fill='%234B47D6'/%3E%3C/svg%3E" />
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap');
+
+  :root{
+    --paper:#F5F6FB;
+    --surface:#FFFFFF;
+    --ink:#15182B;
+    --muted:#646A85;
+    --line:#E6E8F2;
+    --brand:#4B47D6;
+    --brand-soft:#ECECFB;
+    --done:#2E9E54;
+    --discord:#5865F2;
+
+    /* intercalaires : une couleur par matière */
+    --maths:#4B47D6;
+    --maexp:#8A3FD6;
+    --physique:#0E97A6;
+    --francais:#DB4C7B;
+    --philo:#C6841A;
+    --ece:#2E9E54;
+    --sup:#E5644E;
+
+    --radius:18px;
+    --shadow:0 1px 2px rgba(21,24,43,.04), 0 8px 28px rgba(21,24,43,.06);
+    --shadow-hover:0 4px 10px rgba(21,24,43,.07), 0 18px 44px rgba(21,24,43,.12);
+    --display:'Bricolage Grotesque', system-ui, sans-serif;
+    --body:'Inter', system-ui, sans-serif;
+    --mono:'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+  :focus-visible{outline:3px solid var(--brand);outline-offset:2px;border-radius:6px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+
+  /* ---------- en-tête ---------- */
+  header.top{position:sticky;top:0;z-index:50;background:rgba(245,246,251,.82);backdrop-filter:saturate(160%) blur(12px);border-bottom:1px solid var(--line)}
+  .top .wrap{display:flex;align-items:center;gap:18px;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:1.25rem;letter-spacing:-.02em}
+  .brand .dot{width:13px;height:13px;border-radius:4px;background:var(--brand);transform:rotate(45deg)}
+  nav.menu{margin-left:auto;display:flex;gap:6px}
+  nav.menu button{padding:8px 14px;border-radius:10px;font-weight:600;font-size:.92rem;color:var(--muted);transition:background .15s,color .15s}
+  nav.menu button:hover{background:var(--brand-soft);color:var(--brand)}
+  nav.menu button.active{color:var(--brand);background:var(--brand-soft)}
+
+  /* ---------- fil d'ariane ---------- */
+  .crumb{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted);margin:26px 0 4px;flex-wrap:wrap}
+  .crumb button{font-weight:600;color:var(--muted)}
+  .crumb button:hover{color:var(--brand)}
+  .crumb .sep{opacity:.5}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;overflow:hidden;border-radius:28px;margin-top:30px;padding:64px 40px 60px;
+    background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.85)),
+      repeating-linear-gradient(0deg,transparent 0 27px,rgba(75,71,214,.10) 27px 28px),
+      repeating-linear-gradient(90deg,transparent 0 27px,rgba(75,71,214,.10) 27px 28px),#fff;
+    border:1px solid var(--line);box-shadow:var(--shadow)}
+  .hero .eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--brand);font-weight:600}
+  .hero h1{font-family:var(--display);font-weight:800;font-size:clamp(2.2rem,5.5vw,3.6rem);line-height:1.02;letter-spacing:-.03em;margin:14px 0 16px;max-width:16ch}
+  .hero p{font-size:1.08rem;color:var(--muted);max-width:46ch}
+  .hero .by{margin-top:18px;font-size:.86rem;color:var(--muted)}
+  .hero .by b{color:var(--ink)}
+
+  /* ---------- choix de niveau ---------- */
+  .levels{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:28px 0 10px}
+  .level-card{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:30px 28px;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s;position:relative;overflow:hidden}
+  .level-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+  .level-card .num{font-family:var(--display);font-weight:800;font-size:3.4rem;line-height:1;color:var(--brand);opacity:.16;position:absolute;top:14px;right:22px}
+  .level-card h2{font-family:var(--display);font-weight:700;font-size:1.5rem;letter-spacing:-.02em}
+  .level-card .tags{margin-top:12px;font-size:.86rem;color:var(--muted)}
+  .level-card .go{margin-top:18px;display:inline-flex;align-items:center;gap:7px;font-weight:600;color:var(--brand);font-size:.95rem}
+
+  /* ---------- sections ---------- */
+  .section-head{margin:6px 0 22px}
+  .section-head h2{font-family:var(--display);font-weight:800;font-size:clamp(1.7rem,3.6vw,2.4rem);letter-spacing:-.025em}
+  .section-head p{color:var(--muted);margin-top:6px;max-width:60ch}
+
+  /* ---------- grille matières ---------- */
+  .subjects{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;margin-bottom:60px}
+  .subject{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px 22px 20px;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s;position:relative;overflow:hidden}
+  .subject::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--c)}
+  .subject:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+  .subject .chip{display:inline-block;font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:#fff;background:var(--c);padding:4px 9px;border-radius:7px}
+  .subject h3{font-family:var(--display);font-weight:700;font-size:1.3rem;margin:14px 0 4px;letter-spacing:-.02em}
+  .subject .meta{font-size:.85rem;color:var(--muted)}
+
+  /* ---------- vue matière ---------- */
+  .matiere-banner{display:flex;align-items:center;gap:14px;margin:4px 0 6px}
+  .matiere-banner .spine{width:10px;height:38px;border-radius:5px;background:var(--c)}
+  .matiere-banner h2{font-family:var(--display);font-weight:800;font-size:clamp(1.8rem,4vw,2.6rem);letter-spacing:-.025em}
+
+  .progress{max-width:420px;margin:2px 0 6px}
+  .progress .plabel{font-size:.8rem;color:var(--muted);font-family:var(--mono);margin-bottom:6px}
+  .progress .ptrack{height:8px;border-radius:6px;background:var(--line);overflow:hidden}
+  .progress .pfill{height:100%;background:var(--done);border-radius:6px;transition:width .4s ease}
+
+  .search{position:relative;margin:18px 0 24px;max-width:420px}
+  .search input{width:100%;padding:13px 16px 13px 42px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-size:.96rem;font-family:inherit;color:var(--ink);box-shadow:var(--shadow)}
+  .search input::placeholder{color:var(--muted)}
+  .search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted)}
+
+  .chapter{background:var(--surface);border:1px solid var(--line);border-radius:14px;margin-bottom:12px;overflow:hidden;box-shadow:var(--shadow)}
+  .chapter-head{display:flex;align-items:center;gap:10px;padding:0 14px 0 20px}
+  .chapter-toggle{flex:1;display:flex;align-items:center;gap:14px;padding:18px 6px 18px 0;text-align:left;min-width:0}
+  .chapter-toggle .idx{font-family:var(--mono);font-size:.8rem;color:var(--c);font-weight:600;min-width:28px}
+  .chapter-toggle .t{font-family:var(--display);font-weight:700;font-size:1.12rem;flex:1;letter-spacing:-.01em;overflow:hidden;text-overflow:ellipsis}
+  .chapter-toggle .count{font-size:.8rem;color:var(--muted);font-family:var(--mono)}
+  .chapter-toggle .caret{transition:transform .25s;color:var(--muted)}
+  .chapter[open] .caret{transform:rotate(180deg)}
+  .chapter-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s ease}
+  .chapter[open] .chapter-body{grid-template-rows:1fr}
+  .chapter-body > div{overflow:hidden}
+  .resources{padding:2px 14px 14px}
+
+  /* bouton "vu" */
+  .done-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 11px;border-radius:9px;border:1px solid var(--line);font-size:.78rem;font-weight:600;color:var(--muted);white-space:nowrap;transition:all .15s}
+  .done-btn:hover{border-color:var(--done);color:var(--done)}
+  .done-btn .ring{width:14px;height:14px;border-radius:50%;border:2px solid currentColor;display:grid;place-items:center}
+  .done-btn .ring svg{opacity:0}
+  .done-btn.is-done{background:#E7F4EC;border-color:#BFE4CC;color:var(--done)}
+  .done-btn.is-done .ring{background:var(--done);border-color:var(--done);color:#fff}
+  .done-btn.is-done .ring svg{opacity:1}
+
+  .res{display:flex;align-items:center;gap:13px;padding:11px 8px;border-radius:10px;transition:background .15s}
+  .res:hover{background:var(--paper)}
+  .res + .res{border-top:1px solid var(--line)}
+  .res .badge{font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;padding:4px 8px;border-radius:6px;white-space:nowrap}
+  .res .rtitle{flex:1;font-size:.96rem;font-weight:500}
+  .res .open{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;font-weight:600;color:var(--brand);white-space:nowrap;padding:7px 12px;border-radius:9px;border:1px solid var(--brand-soft);transition:background .15s}
+  .res .open:hover{background:var(--brand-soft)}
+  .empty{padding:40px 0;text-align:center;color:var(--muted)}
+
+  .b-cours{background:#ECECFB;color:#4B47D6}
+  .b-fiche{background:#FDEFD7;color:#A9690B}
+  .b-exos{background:#DEF4E5;color:#1F7A3D}
+  .b-corrige{background:#E3F1F3;color:#0B7886}
+  .b-annale{background:#FBE3EC;color:#B23064}
+  .b-lien{background:#EAEBF1;color:#54607E}
+  .b-video{background:#F1E6FB;color:#7E3FBE}
+
+  /* ---------- communauté / contribuer / legal ---------- */
+  .big-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:34px;box-shadow:var(--shadow);margin-bottom:20px}
+  .channels{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 24px}
+  .channels span{font-family:var(--mono);font-size:.78rem;color:var(--muted);background:var(--paper);border:1px solid var(--line);padding:6px 11px;border-radius:8px}
+  .channels span::before{content:"# ";color:var(--brand);font-weight:700}
+  .rules{font-size:.86rem;color:var(--muted);margin-top:18px}
+  .btn{display:inline-flex;align-items:center;gap:9px;background:var(--brand);color:#fff;font-weight:600;padding:13px 24px;border-radius:11px;font-size:.98rem;transition:filter .15s,transform .1s}
+  .btn:hover{filter:brightness(1.08)}
+  .btn:active{transform:translateY(1px)}
+  .btn.discord{background:var(--discord)}
+  .btn.ghost{background:var(--brand-soft);color:var(--brand)}
+
+  .contrib-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .contrib-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+  .contrib-card h3{font-family:var(--display);font-weight:700;font-size:1.3rem;margin-bottom:6px;letter-spacing:-.02em}
+  .contrib-card p{color:var(--muted);font-size:.94rem;margin-bottom:auto;padding-bottom:18px}
+
+  .legal{max-width:720px}
+  .legal h3{font-family:var(--display);font-weight:700;font-size:1.15rem;margin:22px 0 6px;letter-spacing:-.01em}
+  .legal p{color:#33384f;font-size:.95rem;margin-bottom:8px}
+  .legal .muted{color:var(--muted);font-size:.85rem}
+
+  footer{border-top:1px solid var(--line);margin-top:40px;padding:30px 0 50px;color:var(--muted);font-size:.85rem}
+  footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  footer a{font-weight:600}
+  footer a:hover{color:var(--brand)}
+
+  .page{display:none;animation:fade .35s ease}
+  .page.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  @media(max-width:720px){
+    .levels{grid-template-columns:1fr}
+    .contrib-grid{grid-template-columns:1fr}
+    .hero{padding:44px 24px 42px;margin-top:18px}
+    nav.menu button{padding:8px 10px;font-size:.85rem}
+    .done-btn span{display:none}
+    .done-btn{padding:7px}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <button class="brand" onclick="go('home')"><span class="dot"></span>Chavry</button>
+    <nav class="menu" id="menu">
+      <button data-nav="home" onclick="go('home')">Accueil</button>
+      <button data-nav="forum" onclick="go('forum')">Entraide</button>
+      <button data-nav="contribuer" onclick="go('contribuer')">Contribuer</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- ACCUEIL -->
+  <section id="page-home" class="page show">
+    <div class="hero">
+      <div class="eyebrow">Première · Terminale</div>
+      <h1>Réviser le bac, sans se perdre dans ses dossiers.</h1>
+      <p>Des cours, des fiches, des exos corrigés et les meilleurs liens, rangés par matière et par chapitre. Tout est téléchargeable.</p>
+      <div class="by">Un projet de l'<b>association Chavry</b> — Lycée Émilie de Rodat, Toulouse. Par des élèves, pour des élèves.</div>
+    </div>
+
+    <div class="section-head" style="margin-top:38px"><h2>Choisis ton niveau</h2></div>
+    <div class="levels">
+      <button class="level-card" onclick="go('niveau','premiere')">
+        <span class="num">1ʳᵉ</span>
+        <h2>Première</h2>
+        <div class="tags">Maths · Physique-Chimie · Français</div>
+        <span class="go">Voir les matières →</span>
+      </button>
+      <button class="level-card" onclick="go('niveau','terminale')">
+        <span class="num">Tˡᵉ</span>
+        <h2>Terminale</h2>
+        <div class="tags">Maths · Maths expertes · Physique-Chimie · ECE · Philosophie · Vers le sup</div>
+        <span class="go">Voir les matières →</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- NIVEAU -->
+  <section id="page-niveau" class="page">
+    <div class="crumb" id="crumb-niveau"></div>
+    <div class="section-head"><h2 id="niveau-title"></h2><p id="niveau-sub"></p></div>
+    <div class="subjects" id="subjects"></div>
+  </section>
+
+  <!-- MATIÈRE -->
+  <section id="page-matiere" class="page">
+    <div class="crumb" id="crumb-matiere"></div>
+    <div class="matiere-banner"><span class="spine" id="mat-spine"></span><h2 id="mat-title"></h2></div>
+    <div class="progress" id="mat-progress"><div class="plabel" id="plabel"></div><div class="ptrack"><div class="pfill" id="pfill"></div></div></div>
+    <div class="search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input id="search" placeholder="Rechercher un chapitre ou une ressource…" oninput="renderMatiere()" />
+    </div>
+    <div id="chapters"></div>
+  </section>
+
+  <!-- ENTRAIDE / DISCORD -->
+  <section id="page-forum" class="page">
+    <div class="section-head" style="margin-top:30px"><h2>Coin entraide</h2><p>Une question, un conseil de révision, une méthode qui marche ? Rejoins la communauté Discord de Chavry. C'est gratuit et tu y trouveras de l'aide par matière.</p></div>
+    <div class="big-card">
+      <h3 style="font-family:var(--display);font-weight:700;font-size:1.35rem;letter-spacing:-.02em">Le Discord de Chavry</h3>
+      <p style="color:var(--muted);margin-top:6px">Des salons par matière pour poser tes questions et partager tes fiches :</p>
+      <div class="channels">
+        <span>annonces</span><span>maths</span><span>maths-expertes</span><span>physique-chimie</span><span>ece</span><span>philo</span><span>français</span><span>vers-le-sup</span><span>entraide</span>
+      </div>
+      <!-- À REMPLACER : colle ton invitation Discord (Paramètres du serveur → Invitations) -->
+      <a class="btn discord" href="https://discord.gg/TON-LIEN" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.3 5.3A17 17 0 0 0 15 4l-.2.4a13 13 0 0 1 3.7 1.2 12 12 0 0 0-10.9 0A13 13 0 0 1 11.2 4.4L11 4a17 17 0 0 0-4.3 1.3C4 9.3 3.3 13.2 3.6 17a17 17 0 0 0 5.2 2.6l.6-1a11 11 0 0 1-1.8-.9l.4-.3a12 12 0 0 0 10.3 0l.4.3a11 11 0 0 1-1.8.9l.6 1a17 17 0 0 0 5.2-2.6c.4-4.4-.7-8.3-3.4-11.7ZM9.5 14.7c-.8 0-1.5-.8-1.5-1.7s.7-1.7 1.5-1.7 1.5.8 1.5 1.7-.7 1.7-1.5 1.7Zm5 0c-.8 0-1.5-.8-1.5-1.7s.7-1.7 1.5-1.7 1.5.8 1.5 1.7-.7 1.7-1.5 1.7Z"/></svg>
+        Rejoindre le Discord
+      </a>
+      <p class="rules">Règles : on reste bienveillant, on s'entraide, pas de partage de copies ni de contenu protégé. Un modérateur veille au grain.</p>
+    </div>
+  </section>
+
+  <!-- CONTRIBUER -->
+  <section id="page-contribuer" class="page">
+    <div class="section-head" style="margin-top:30px"><h2>Contribuer</h2><p>Chavry est gratuit et tenu par des élèves. Tu peux aider de deux façons.</p></div>
+    <div class="contrib-grid">
+      <div class="contrib-card">
+        <h3>💛 Soutenir l'association</h3>
+        <p>Un don aide à couvrir le matériel et les actions de l'association. Le paiement passe par HelloAsso, la plateforme des associations françaises — sécurisé et sans frais pour toi.</p>
+        <!-- À REMPLACER : crée une cagnotte sur helloasso.com et colle son lien -->
+        <a class="btn" href="https://www.helloasso.com/TON-ASSO" target="_blank" rel="noopener">Faire un don sur HelloAsso →</a>
+      </div>
+      <div class="contrib-card">
+        <h3>📚 Proposer du contenu</h3>
+        <p>Une fiche, un cours, des exos corrigés à partager ? Envoie-les via le formulaire. On les relit avant publication (qualité + droits d'auteur).</p>
+        <!-- À REMPLACER : crée un Google Form et colle son lien de partage -->
+        <a class="btn ghost" href="https://forms.gle/TON-FORMULAIRE" target="_blank" rel="noopener">Proposer une ressource →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENTIONS LÉGALES -->
+  <section id="page-legal" class="page">
+    <div class="crumb"><button onclick="go('home')">Accueil</button><span class="sep">›</span><span>Mentions légales</span></div>
+    <div class="section-head"><h2>Mentions légales &amp; confidentialité</h2></div>
+    <div class="legal">
+      <h3>Éditeur</h3>
+      <p>Association Chavry — Lycée Émilie de Rodat, Toulouse.<br>Contact : <span class="muted">à compléter (adresse e-mail de l'association)</span>.</p>
+      <h3>Hébergement</h3>
+      <p>Site hébergé par GitHub, Inc. (GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis.</p>
+      <h3>Données personnelles</h3>
+      <p>Ce site ne collecte aucune donnée personnelle directement et ne dépose pas de cookie de suivi. La seule donnée stockée est le suivi « vu » de tes chapitres, conservé localement dans ton navigateur (rien n'est envoyé à un serveur).</p>
+      <p>L'entraide se déroule sur Discord et l'envoi de contenu via un formulaire Google : ces services tiers ont leurs propres politiques de confidentialité, que nous t'invitons à consulter.</p>
+      <h3>Propriété intellectuelle</h3>
+      <p>Les ressources proposées sont soit produites par l'association, soit des liens vers des sources officielles. Si un contenu te semble enfreindre un droit d'auteur, signale-le à l'association pour retrait.</p>
+      <p class="muted" style="margin-top:18px">Modèle à adapter — ce n'est pas un avis juridique.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Association Chavry · Lycée Émilie de Rodat, Toulouse</span>
+    <span><button onclick="go('legal')">Mentions légales · Confidentialité</button></span>
+  </div>
+</footer>
+
+<script>
+/* ============================================================================
+   CONTENU — édite uniquement cet objet pour ajouter cours / fiches / liens.
+   couleur : maths | maexp | physique | francais | philo | ece | sup
+   type    : cours | fiche | exos | corrige | annale | lien | video
+   format  : pdf | drive | lien | video
+   ============================================================================ */
+const DATA = {
+  premiere: {
+    label: "Première",
+    matieres: {
+      maths: { nom:"Mathématiques", couleur:"maths", chapitres:[
+        { titre:"Suites numériques", ressources:[
+          {titre:"Cours complet — suites arithmétiques et géométriques", type:"cours", format:"pdf", url:"#"},
+          {titre:"Fiche de révision (recto-verso)", type:"fiche", format:"drive", url:"#"},
+          {titre:"Exercices d'application + corrigés", type:"exos", format:"pdf", url:"#"},
+        ]},
+        { titre:"Dérivation", ressources:[
+          {titre:"Cours — nombre dérivé, fonction dérivée", type:"cours", format:"pdf", url:"#"},
+          {titre:"20 dérivées à connaître par cœur", type:"fiche", format:"pdf", url:"#"},
+        ]},
+        { titre:"Produit scalaire", ressources:[
+          {titre:"Cours + formules", type:"cours", format:"drive", url:"#"},
+          {titre:"Annales par thème", type:"annale", format:"lien", url:"#"},
+        ]},
+        { titre:"Probabilités conditionnelles", ressources:[
+          {titre:"Cours — arbres et indépendance", type:"cours", format:"pdf", url:"#"},
+        ]},
+      ]},
+      physique: { nom:"Physique-Chimie", couleur:"physique", chapitres:[
+        { titre:"Constitution et transformations de la matière", ressources:[
+          {titre:"Cours — modèle de l'atome, mole", type:"cours", format:"pdf", url:"#"},
+          {titre:"Fiche formules", type:"fiche", format:"drive", url:"#"},
+        ]},
+        { titre:"Mouvement et interactions", ressources:[
+          {titre:"Cours — forces, vecteurs", type:"cours", format:"pdf", url:"#"},
+        ]},
+        { titre:"Ondes et signaux", ressources:[
+          {titre:"Vidéo — comprendre les ondes en 12 min", type:"video", format:"video", url:"#"},
+        ]},
+      ]},
+      francais: { nom:"Français", couleur:"francais", chapitres:[
+        { titre:"La poésie", ressources:[
+          {titre:"Méthode du commentaire", type:"cours", format:"pdf", url:"#"},
+          {titre:"Procédés à repérer", type:"fiche", format:"drive", url:"#"},
+        ]},
+        { titre:"Le roman et le récit", ressources:[
+          {titre:"Fiche — points de vue narratifs", type:"fiche", format:"pdf", url:"#"},
+        ]},
+        { titre:"Le théâtre", ressources:[
+          {titre:"Méthode de la dissertation", type:"cours", format:"pdf", url:"#"},
+        ]},
+        { titre:"La littérature d'idées", ressources:[
+          {titre:"Sujets d'oral fréquents", type:"annale", format:"lien", url:"#"},
+        ]},
+      ]},
+    }
+  },
+  terminale: {
+    label: "Terminale",
+    matieres: {
+      maths: { nom:"Mathématiques", couleur:"maths", chapitres:[
+        { titre:"Suites et récurrence", ressources:[
+          {titre:"Cours — raisonnement par récurrence", type:"cours", format:"pdf", url:"#"},
+          {titre:"Fiche méthode rédaction", type:"fiche", format:"drive", url:"#"},
+          {titre:"Exos corrigés progressifs", type:"corrige", format:"pdf", url:"#"},
+        ]},
+        { titre:"Limites et continuité", ressources:[
+          {titre:"Cours + théorèmes clés", type:"cours", format:"pdf", url:"#"},
+        ]},
+        { titre:"Nombres complexes", ressources:[
+          {titre:"Cours — forme algébrique et géométrique", type:"cours", format:"pdf", url:"#"},
+          {titre:"Fiche — module, argument, exponentielle", type:"fiche", format:"drive", url:"#"},
+        ]},
+        { titre:"Probabilités — loi binomiale & concentration", ressources:[
+          {titre:"Cours — Bienaymé-Tchebychev", type:"cours", format:"pdf", url:"#"},
+          {titre:"Annales corrigées", type:"annale", format:"lien", url:"#"},
+        ]},
+        { titre:"Géométrie dans l'espace", ressources:[
+          {titre:"Fiche — vecteurs et équations de plan", type:"fiche", format:"pdf", url:"#"},
+        ]},
+        { titre:"Fonction logarithme", ressources:[
+          {titre:"Cours + propriétés", type:"cours", format:"drive", url:"#"},
+        ]},
+      ]},
+      maexp: { nom:"Maths expertes", couleur:"maexp", chapitres:[
+        { titre:"Arithmétique — divisibilité et congruences", ressources:[
+          {titre:"Cours — divisibilité dans ℤ, congruences", type:"cours", format:"pdf", url:"#"},
+          {titre:"Fiche méthode — résoudre une congruence", type:"fiche", format:"drive", url:"#"},
+        ]},
+        { titre:"Nombres premiers, PGCD, Bézout et Gauss", ressources:[
+          {titre:"Cours — PGCD, algorithme d'Euclide", type:"cours", format:"pdf", url:"#"},
+          {titre:"Exos corrigés — théorèmes de Bézout et Gauss", type:"corrige", format:"pdf", url:"#"},
+        ]},
+        { titre:"Matrices et opérations", ressources:[
+          {titre:"Cours — produit, inverse, déterminant 2×2", type:"cours", format:"pdf", url:"#"},
+        ]},
+        { titre:"Matrices et suites", ressources:[
+          {titre:"Cours — puissances de matrices, systèmes", type:"cours", format:"drive", url:"#"},
+          {titre:"Annales corrigées", type:"annale", format:"lien", url:"#"},
+        ]},
+        { titre:"Graphes et chaînes de Markov", ressources:[
+          {titre:"Cours — matrice de transition, état stable", type:"cours", format:"pdf", url:"#"},
+          {titre:"Fiche de révision", type:"fiche", format:"drive", url:"#"},
+        ]},
+      ]},
+      physique: { nom:"Physique-Chimie", couleur:"physique", chapitres:[
+        { titre:"Mouvements et dynamique", ressources:[
+          {titre:"Cours — lois de Newton", type:"cours", format:"pdf", url:"#"},
+        ]},
+        { titre:"Ondes et lumière", ressources:[
+          {titre:"Cours — effet photoélectrique, dualité", type:"cours", format:"pdf", url:"#"},
+          {titre:"Fiche — diffraction & interférences", type:"fiche", format:"drive", url:"#"},
+        ]},
+        { titre:"Constitution et transformations de la matière", ressources:[
+          {titre:"Cours — équilibres et pH", type:"cours", format:"pdf", url:"#"},
+        ]},
+        { titre:"Énergie : conversions et transferts", ressources:[
+          {titre:"Fiche formules thermodynamique", type:"fiche", format:"pdf", url:"#"},
+        ]},
+      ]},
+      ece: { nom:"ECE — épreuve pratique", couleur:"ece", chapitres:[
+        { titre:"Titrage", ressources:[
+          {titre:"Protocole + erreurs à éviter", type:"fiche", format:"pdf", url:"#"},
+        ]},
+        { titre:"Spectrophotométrie", ressources:[
+          {titre:"Méthode — loi de Beer-Lambert", type:"cours", format:"drive", url:"#"},
+        ]},
+        { titre:"Optique", ressources:[
+          {titre:"Montages et mesures clés", type:"fiche", format:"pdf", url:"#"},
+        ]},
+        { titre:"Électrochimie", ressources:[
+          {titre:"Pile, électrolyse — l'essentiel", type:"fiche", format:"pdf", url:"#"},
+        ]},
+        { titre:"Chromatographie", ressources:[
+          {titre:"CCM pas à pas", type:"cours", format:"pdf", url:"#"},
+        ]},
+      ]},
+      philo: { nom:"Philosophie", couleur:"philo", chapitres:[
+        { titre:"Méthode — la dissertation", ressources:[
+          {titre:"Construire un plan en 3 parties", type:"cours", format:"pdf", url:"#"},
+          {titre:"Analyser un sujet (les pièges)", type:"fiche", format:"drive", url:"#"},
+        ]},
+        { titre:"Méthode — l'explication de texte", ressources:[
+          {titre:"Méthode pas à pas", type:"cours", format:"pdf", url:"#"},
+        ]},
+        { titre:"Les notions au programme", ressources:[
+          {titre:"Les 17 notions résumées", type:"fiche", format:"pdf", url:"#"},
+          {titre:"Banque de citations vérifiées", type:"fiche", format:"drive", url:"#"},
+        ]},
+        { titre:"Les grands auteurs", ressources:[
+          {titre:"Kant, Hegel, Nietzsche, Heidegger", type:"cours", format:"pdf", url:"#"},
+        ]},
+      ]},
+      sup: { nom:"Vers le sup", couleur:"sup", chapitres:[
+        { titre:"Choisir sa voie", ressources:[
+          {titre:"Prépa, université, écoles : comparatif", type:"fiche", format:"pdf", url:"#"},
+        ]},
+        { titre:"Parcoursup", ressources:[
+          {titre:"Calendrier et conseils de dossier", type:"lien", format:"lien", url:"#"},
+        ]},
+        { titre:"Méthodes de travail dans le sup", ressources:[
+          {titre:"S'organiser, prendre des notes, réviser", type:"cours", format:"drive", url:"#"},
+        ]},
+        { titre:"Témoignages d'anciens élèves", ressources:[
+          {titre:"Retours d'expérience (vidéos)", type:"video", format:"video", url:"#"},
+        ]},
+      ]},
+    }
+  }
+};
+
+const TYPE_LABEL = {cours:"Cours", fiche:"Fiche", exos:"Exos", corrige:"Corrigé", annale:"Annale", lien:"Lien", video:"Vidéo"};
+const FORMAT = {
+  pdf:   {verbe:"Télécharger", icon:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M12 18v-6M9 15l3 3 3-3"/>'},
+  drive: {verbe:"Ouvrir le Drive", icon:'<path d="M8 2 2 13l4 7h12l4-7L16 2z"/><path d="M2 13h20M8 2l6 11M16 2l-6 11"/>'},
+  lien:  {verbe:"Ouvrir le lien", icon:'<path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/>'},
+  video: {verbe:"Regarder", icon:'<polygon points="5 3 19 12 5 21 5 3"/>'},
+};
+
+/* ---------- suivi "vu", stocké localement (marche une fois le site publié) ---------- */
+function loadDone(){ try{ return JSON.parse(localStorage.getItem('chavry-done')||'{}'); }catch(e){ return {}; } }
+function saveDone(o){ try{ localStorage.setItem('chavry-done', JSON.stringify(o)); }catch(e){} }
+let DONE = loadDone();
+function dkey(n,m,i){ return n+'|'+m+'|'+i; }
+
+let state = {view:"home", niveau:null, matiere:null};
+
+function go(view, niveau, matiere){
+  state = {view, niveau:niveau||state.niveau, matiere:matiere||null};
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));
+  document.getElementById('page-'+view).classList.add('show');
+  document.querySelectorAll('nav.menu button').forEach(b=>b.classList.toggle('active', b.dataset.nav===view));
+  if(view==='niveau') renderNiveau();
+  if(view==='matiere'){ const s=document.getElementById('search'); if(s) s.value=''; renderMatiere(); }
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function renderNiveau(){
+  const niv = DATA[state.niveau];
+  document.getElementById('niveau-title').textContent = niv.label;
+  document.getElementById('niveau-sub').textContent = "Choisis une matière pour accéder aux chapitres.";
+  document.getElementById('crumb-niveau').innerHTML =
+    `<button onclick="go('home')">Accueil</button><span class="sep">›</span><span>${niv.label}</span>`;
+  const grid = document.getElementById('subjects'); grid.innerHTML='';
+  Object.entries(niv.matieres).forEach(([key,m])=>{
+    const nbChap = m.chapitres.length;
+    const nbRes = m.chapitres.reduce((s,c)=>s+c.ressources.length,0);
+    const el = document.createElement('button');
+    el.className='subject'; el.style.setProperty('--c',`var(--${m.couleur})`);
+    el.onclick=()=>go('matiere', state.niveau, key);
+    el.innerHTML = `<span class="chip">${m.nom}</span>
+      <h3>${m.nom}</h3>
+      <div class="meta">${nbChap} chapitre${nbChap>1?'s':''} · ${nbRes} ressource${nbRes>1?'s':''}</div>`;
+    grid.appendChild(el);
+  });
+}
+
+function renderMatiere(){
+  const niv = DATA[state.niveau];
+  const m = niv.matieres[state.matiere];
+  const q = (document.getElementById('search').value||'').toLowerCase().trim();
+  document.getElementById('mat-spine').style.background = `var(--${m.couleur})`;
+  document.getElementById('mat-title').textContent = m.nom;
+  document.getElementById('crumb-matiere').innerHTML =
+    `<button onclick="go('home')">Accueil</button><span class="sep">›</span>`+
+    `<button onclick="go('niveau','${state.niveau}')">${niv.label}</button><span class="sep">›</span><span>${m.nom}</span>`;
+
+  const box = document.getElementById('chapters'); box.innerHTML='';
+  let shown = 0;
+  m.chapitres.forEach((ch,i)=>{
+    const res = q ? ch.ressources.filter(r => (ch.titre+' '+r.titre).toLowerCase().includes(q)) : ch.ressources;
+    const matchTitle = q && ch.titre.toLowerCase().includes(q);
+    if(q && res.length===0 && !matchTitle) return;
+    const list = (q && matchTitle && res.length===0) ? ch.ressources : res;
+    shown++;
+    const done = !!DONE[dkey(state.niveau,state.matiere,i)];
+    const det = document.createElement('div');
+    det.className='chapter'; if(q) det.setAttribute('open','');
+    det.style.setProperty('--c',`var(--${m.couleur})`);
+    det.innerHTML = `
+      <div class="chapter-head">
+        <button class="chapter-toggle" aria-expanded="${q?'true':'false'}" onclick="const c=this.closest('.chapter');c.toggleAttribute('open');this.setAttribute('aria-expanded',c.hasAttribute('open'))">
+          <span class="idx">${String(i+1).padStart(2,'0')}</span>
+          <span class="t">${ch.titre}</span>
+          <span class="count">${list.length}</span>
+          <span class="caret"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <button class="done-btn ${done?'is-done':''}" title="Marquer comme vu" onclick="toggleDone(this,${i})">
+          <span class="ring"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path d="m5 13 4 4L19 7"/></svg></span>
+          <span>${done?'Vu':'À voir'}</span>
+        </button>
+      </div>
+      <div class="chapter-body"><div><div class="resources">${list.map(resRow).join('')}</div></div></div>`;
+    box.appendChild(det);
+  });
+  if(shown===0) box.innerHTML = `<div class="empty">Aucun résultat pour « ${q} ».</div>`;
+  updateProgress();
+}
+
+function toggleDone(btn, i){
+  const k = dkey(state.niveau, state.matiere, i);
+  DONE[k] = !DONE[k]; saveDone(DONE);
+  btn.classList.toggle('is-done', DONE[k]);
+  btn.querySelector('span:last-child').textContent = DONE[k] ? 'Vu' : 'À voir';
+  updateProgress();
+}
+
+function updateProgress(){
+  const m = DATA[state.niveau].matieres[state.matiere];
+  const total = m.chapitres.length;
+  let n = 0;
+  for(let i=0;i<total;i++){ if(DONE[dkey(state.niveau,state.matiere,i)]) n++; }
+  const pct = total ? Math.round(n/total*100) : 0;
+  document.getElementById('plabel').textContent = `${n} / ${total} chapitre${total>1?'s':''} revu${n>1?'s':''}`;
+  document.getElementById('pfill').style.width = pct+'%';
+}
+
+function resRow(r){
+  const f = FORMAT[r.format] || FORMAT.lien;
+  return `<div class="res">
+    <span class="badge b-${r.type}">${TYPE_LABEL[r.type]||r.type}</span>
+    <span class="rtitle">${r.titre}</span>
+    <a class="open" href="${r.url}" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${f.icon}</svg>${f.verbe}
+    </a>
+  </div>`;
+}
+</script>
